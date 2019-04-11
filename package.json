@@ -1,0 +1,21 @@
+{
+  "name": "serverless-mysql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:msweeneydev/serverless-mysql.git",
+  "author": "msweeneydev <mail@msweeneydev.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "next": "^8.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "now-build": "yarn build"
+  }
+}
