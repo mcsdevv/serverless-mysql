@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/api/profiles/add",
+      "dest": "api/profiles/add.js"
+    },
+    {
       "src": "/api/profiles/(?<id>[^/]*)",
       "dest": "api/profiles/profile.js?id=$id"
     }

@@ -7,9 +7,14 @@
   "license": "MIT",
   "dependencies": {
     "isomorphic-unfetch": "^3.0.0",
+    "micro": "^9.3.3",
     "next": "^8.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "serverless-mysql": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4"
   }
 }
