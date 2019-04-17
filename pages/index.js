@@ -6,36 +6,53 @@ class Main extends React.Component {
   static async getInitialProps({ req }) {
     const host = req ? `https://${req.headers.host}` : "";
     const res = await fetch(`${host}/api/profiles`);
-    const json = await res.json();
-    return { profiles: json.profiles, host };
+    const { profiles } = await res.json();
+    return { profiles, host };
   }
   state = {
-    name: "",
-    address: "",
-    email: "",
-    avatar: ""
+    new: {
+      name: "",
+      address: "",
+      email: "",
+      avatar: ""
+    }
   };
   addProfile = async () => {
     const res = await fetch(`${this.props.host}/api/profiles/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state.new)
     });
-    const json = await res.json();
-    console.log(json);
+    this.resetState();
+    if (res.status === 200) {
+      const profile = await res.json();
+      const profiles = this.state.profiles
+        ? [...this.state.profiles, profile]
+        : [...this.props.profiles, profile];
+      this.setState({ profiles });
+    }
   };
-  // addProfile = async () => {
-  //   const res = await fetch(`${this.props.host}/api/profiles/add`);
-  //   const json = await res.json();
-  //   console.log(json);
-  // };
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      new: {
+        ...this.state.new,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+  resetState = () => {
+    this.setState({
+      new: {
+        name: "",
+        address: "",
+        email: "",
+        avatar: ""
+      }
     });
   };
   render() {
-    const { name, address, email, avatar } = this.state;
+    const { profiles } = this.state;
+    const { name, address, email, avatar } = this.state.new;
     return (
       <>
         <input name="name" onChange={this.handleChange} value={name} />
@@ -43,7 +60,7 @@ class Main extends React.Component {
         <input name="email" onChange={this.handleChange} value={email} />
         <input name="avatar" onChange={this.handleChange} value={avatar} />
         <button onClick={this.addProfile}>ADD</button>
-        <HomePage profiles={this.props.profiles} />
+        <HomePage profiles={profiles || this.props.profiles} />
       </>
     );
   }
