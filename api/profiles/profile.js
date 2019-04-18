@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   const { query } = url.parse(req.url, true);
   const [profile] = await db.query(`
     SELECT *
-    FROM data
+    FROM profiles
     WHERE id = ${query.id}
   `);
   res.end(JSON.stringify({ profile }));
