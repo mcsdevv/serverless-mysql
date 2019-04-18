@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import Link from "next/link";
 
-function HomePage({ profiles }) {
+function HomePage({ profiles, page }) {
   return (
     <>
       <Head>
@@ -25,6 +25,12 @@ function HomePage({ profiles }) {
           </li>
         ))}
       </ul>
+      <Link prefetch href={`/?page=${page - 1}`}>
+        Previous
+      </Link>
+      <Link prefetch href={`/?page=${page + 1}`}>
+        Next
+      </Link>
       <style jsx>{`
         ul li::before {
           content: "";
@@ -40,9 +46,12 @@ function HomePage({ profiles }) {
   );
 }
 
-HomePage.getInitialProps = async ({ req }) => {
+HomePage.getInitialProps = async ({ req, query }) => {
   const host = req ? `https://${req.headers.host}` : "";
-  const res = await fetch(`${host}/api/profiles`);
+  const pageRequest = query.page
+    ? `${host}/api/profiles?page=${query.page}`
+    : `${host}/api/profiles`;
+  const res = await fetch(pageRequest);
   const json = await res.json();
   return json;
 };
