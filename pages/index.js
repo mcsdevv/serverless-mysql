@@ -7,7 +7,6 @@ function HomePage({ profiles, page, pageCount }) {
     <>
       <Head>
         <title>Serverless MySQL on ZEIT Now - Profiles</title>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
         <link
           rel="stylesheet"
           href="https://css.zeit.sh/v1.css"
