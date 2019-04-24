@@ -2,6 +2,13 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import Link from "next/link";
 
+ProfilePage.getInitialProps = async ({ req, query }) => {
+  const host = req ? `https://${req.headers.host}` : "";
+  const res = await fetch(`${host}/api/profiles/${query.id}`);
+  const json = await res.json();
+  return json;
+};
+
 function ProfilePage({ profile }) {
   return (
     <>
@@ -33,12 +40,5 @@ function ProfilePage({ profile }) {
     </>
   );
 }
-
-ProfilePage.getInitialProps = async ({ req, query }) => {
-  const host = req ? `https://${req.headers.host}` : "";
-  const res = await fetch(`${host}/api/profiles/${query.id}`);
-  const json = await res.json();
-  return json;
-};
 
 export default ProfilePage;
