@@ -14,7 +14,7 @@ function HomePage({ profiles, page, pageCount }) {
         />
       </Head>
       <header>
-        <h1>Serverless MySQK Application</h1>
+        <h1>Serverless MySQL Application</h1>
         <h2>Robot Profiles</h2>
         <p>
           This website is a collection of robot profiles, loaded from a Node.js

@@ -3,8 +3,8 @@ const url = require("url");
 
 module.exports = async (req, res) => {
   const { query } = url.parse(req.url, true);
-  const page = parseInt(query.page) || 1;
-  let limit = parseInt(query.limit) || 10;
+  let page = parseInt(query.page) || 1;
+  const limit = parseInt(query.limit) || 10;
   if (page < 1) page = 1;
   const profiles = await db.query(`
       SELECT *
