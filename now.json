@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "name": "serverless-mysql",
-  "alias": "serverless-mysql.now.sh",
+  "name": "nextjs-mysql",
+  "alias": "nextjs-mysql.now.sh",
   "builds": [
     { "src": "api/**/*.js", "use": "@now/node" },
     { "src": "next.config.js", "use": "@now/next" }

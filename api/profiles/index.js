@@ -1,4 +1,5 @@
 const db = require("../../lib/db");
+const sql = require("sql-template-strings");
 const url = require("url");
 
 module.exports = async (req, res) => {
@@ -6,7 +7,7 @@ module.exports = async (req, res) => {
   let page = parseInt(query.page) || 1;
   const limit = parseInt(query.limit) || 9;
   if (page < 1) page = 1;
-  const profiles = await db.query(`
+  const profiles = await db.query(sql`
       SELECT *
       FROM profiles
       LIMIT ${(page - 1) * limit}, ${limit}
