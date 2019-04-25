@@ -1,6 +1,6 @@
-const db = require("../../lib/db");
-const sql = require("sql-template-strings");
-const url = require("url");
+const db = require('../../lib/db');
+const sql = require('sql-template-strings');
+const url = require('url');
 
 module.exports = async (req, res) => {
   const { query } = url.parse(req.url, true);
