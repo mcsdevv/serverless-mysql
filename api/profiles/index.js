@@ -4,7 +4,7 @@ const url = require("url");
 module.exports = async (req, res) => {
   const { query } = url.parse(req.url, true);
   let page = parseInt(query.page) || 1;
-  const limit = parseInt(query.limit) || 10;
+  const limit = parseInt(query.limit) || 9;
   if (page < 1) page = 1;
   const profiles = await db.query(`
       SELECT *
@@ -18,5 +18,5 @@ module.exports = async (req, res) => {
     `);
   const { profilesCount } = count[0];
   const pageCount = Math.ceil(profilesCount / limit);
-  res.end(JSON.stringify({ profiles, profilesCount, pageCount, page }));
+  res.end(JSON.stringify({ profiles, pageCount, page }));
 };

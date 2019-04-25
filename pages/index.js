@@ -4,9 +4,8 @@ import Link from "next/link";
 
 HomePage.getInitialProps = async ({ req, query }) => {
   const host = req ? `https://${req.headers.host}` : "";
-  const pageRequest = query.page
-    ? `${host}/api/profiles?page=${query.page}&limit=${query.limit || 9}`
-    : `${host}/api/profiles?limit=${query.limit || 9}`;
+  const pageRequest = `${host}/api/profiles?page=${query.page ||
+    1}&limit=${query.limit || 9}`;
   const res = await fetch(pageRequest);
   const json = await res.json();
   return json;
